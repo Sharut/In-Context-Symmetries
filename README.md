@@ -9,7 +9,7 @@ At the core of self-supervised learning for vision is the idea of learning invar
 
 
 <p align='center'>
-<img src='./figures/main-fig.png' width='1000'/>
+<img src='main-fig.png' width='1000'/>
 </p>
 
 
