@@ -1,0 +1,74 @@
+hydra:
+  job_logging:
+    root:
+      handlers: [file, console]  # logging to file only.
+  run:
+    dir: "../../logs"
+
+debug_mode: False    # Do not log Wandb
+
+wandb:
+  entity: sharut
+  project: LVM
+
+# defaults:
+dataset: 3drotcolor
+data_dir: /scratch/sharut/data/3DIEBench-main/
+resolution: 128
+dataparallel: False
+
+# model
+method: ContextSSL
+custom_name: ''
+name: run
+backbone: resnet18
+projection_dim: 512 
+
+# train options
+seed: 42 # sacred handles automatic seeding when passed in the config
+batch_size: 256
+test_batch_size: 4
+workers: 16
+epoch: 0
+epochs: 300                                   # 300 epochs for linear probe
+log_interval: 5
+save_interval: 200
+
+# loss options
+learning_rate: 0.03 
+momentum: 0.9
+warmup_epochs: 10
+weight_decay: 0.0005 # 0.0005 #1.0e-6 # "optimized using LARS [...] and weight decay of 10−6", should be 1e-4 for SimSiam
+moving_average_decay: 0.99 # EMA Decay in BYOL
+temperature: 0.5 # 0.5 # see appendix B.7.: Optimal temperature under different batch sizes
+
+
+# 
+cache_type: 'train'
+weight_equiv_loss: 1
+proj_hidden_dim: 2048
+eval_predictor: False
+is_invariant: False
+env_type: 'double'
+load_model: simclr_resnet18_epoch1000.pt
+load_online_linear_probe: online_linear_probe_resnet18_epoch1000.pt
+
+# transformers parameters
+n_embd: 2048
+n_layer: 3
+n_head: 4
+hidden_dim: 2048
+block_size: 128
+aug_method: concat # concat or add
+add_scale: 0.1
+readintype: linear
+
+env_ratio: [0.5, 0.5, 0.0]
+random_mask: False
+mask_prob: 0.15
+eval_normalize: True # whether to normalize prediction vectors for evaluation probing
+
+# eval
+eval_ctxt: [0, 2, 14, 30, 126]
+equiv_eval: linear
+pretrained_model_dir: ./ckpt/
