@@ -8,19 +8,19 @@ hydra:
 debug_mode: False    # Do not log Wandb
 
 wandb:
-  entity: sharut
-  project: LVM
+  entity: <YOUR_WANDB_ENTITY>
+  project: <YOUR_WANDB_PROJECT>
 
 # defaults:
 dataset: 3drotcolor
-data_dir: /scratch/sharut/data/3DIEBench-main/
+data_dir: <PATH_TO_DATA>
 resolution: 128
 dataparallel: False
 
 # model
 method: ContextSSL
 custom_name: ''
-name: run
+name: <RUN_NAME>
 backbone: resnet18
 projection_dim: 512 
 
@@ -71,4 +71,5 @@ eval_normalize: True # whether to normalize prediction vectors for evaluation pr
 # eval
 eval_ctxt: [0, 2, 14, 30, 126]
 equiv_eval: linear
-pretrained_model_dir: ./ckpt/
+pretrained_model_dir: <PATH_TO_PRETRAINED_MODEL>
+

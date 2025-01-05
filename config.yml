@@ -8,12 +8,12 @@ hydra:
 debug_mode: False    # Do not log Wandb
 
 wandb:
-  entity: sharut
-  project: LVM
+  entity: <YOUR_WANDB_ENTITY>
+  project: <YOUR_WANDB_PROJECT>
 
 # defaults:
 dataset: 3drotcolor
-data_dir: /scratch/sharut/data/3DIEBench-main/
+data_dir: <PATH_TO_DATA>
 resolution: 128
 dataparallel: False
 
@@ -69,4 +69,4 @@ eval_normalize: True # whether to normalize prediction vectors for evaluation pr
 
 # eval
 equiv_eval: linear
-pretrained_model_dir: ../LVM_logs/SimCLR_left2right_C128_L3/3drotcolor/simclr_resnet18_epoch1000.pt
+pretrained_model_dir: <PATH_TO_PRETRAINED_MODEL>

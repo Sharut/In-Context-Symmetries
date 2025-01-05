@@ -167,7 +167,12 @@ def train(args: DictConfig) -> None:
 
     n_classes = 55
     args.augmentation_dim = 6
-    test_modes = ['rot', 'color', 'none']
+    if args.is_invariant:
+        test_modes = ['none']
+    elif args.env_type == 'single':
+        test_modes = ['aug', 'none']
+    elif args.env_type == 'double':
+        test_modes = ['rot', 'color', 'none']
 
     train_loader = DataLoader(train_dataset,
                               batch_size=args.batch_size,

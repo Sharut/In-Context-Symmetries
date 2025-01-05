@@ -58,6 +58,20 @@ CUDA_VISIBLE_DEVICES=3 python main.py \
 This command reflects the best-performing hyperparameter settings used in our experiments, corresponding to the optimal results reported in the paper. Further, training with the provided configuration requires only about 10 GB of GPU memory, making it feasible to train on a single standard NVIDIA GPUs (e.g., an RTX 2080, V100, A100, A6000 etc). Training under this configuration for a 1000 epochs takes about 7-8 hours on one NVIDIA A6000. 
 
 ### ContextSSL Evaluation
+To quantitatively evaluate the trained representation’s equivariance to symmetry groups, we compute $R^2$ on the task of predicting the corresponding transformation parameters. Use the following command to run the evaluation:
+
+```
+CUDA_VISIBLE_DEVICES=3 python eval_equivariance.py \
+    seed=42 \
+    log_interval=50 \
+    eval_ctxt=[0,2,6,14,30,126] \ 
+    epochs=200 \
+    learning_rate=0.001 \
+    load_model=simclr_resnet18_epoch1000.pt \
+    pretrained_model_dir=./ckpt/
+```
+
+
 To quantitatively evaluate the trained representation’s equivariance to rotation, we compute the Mean Reciprocal Rank (MRR) and Hit Rate H@k on the validation set, as reported in [Table 1](https://openreview.net/pdf?id=etPAH4xSUn#page=8.10) of the paper. Use the following command to run the evaluation:
 
 ```
